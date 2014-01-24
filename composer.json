@@ -1,7 +1,7 @@
 {
     "name": "ebidtech/common-object",
     "type": "library",
-    "description": "A collection of common objects easy to reuse",
+    "description": "A collection of common objects",
     "keywords": ["php", "object", "common"],
     "homepage": "http://github.com/ebidtech/common-object",
     "license": "MIT",
@@ -13,7 +13,9 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "ebidtech/validator": "0.1.*",
+        "ebidtech/collection": "1.1.*"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
