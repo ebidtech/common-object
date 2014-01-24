@@ -22,6 +22,17 @@ class InvalidArgumentException extends \InvalidArgumentException
      *
      * @return InvalidArgumentException
      */
+    public static function notString($property, $value)
+    {
+        return new static(sprintf('"%s" not string type: "%s"', $property, static::getStringRepresentation($value)));
+    }
+
+    /**
+     * @param string $property
+     * @param mixed  $value
+     *
+     * @return InvalidArgumentException
+     */
     public static function notPositiveInteger($property, $value)
     {
         return new static(
