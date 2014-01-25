@@ -3,7 +3,7 @@ Common Objects
 
 Repository to store/share simple objects that can be reuse across projects.
 
-[![Latest Stable Version](https://poser.pugx.org/ebidtech/common-object/v/stable.png)](https://packagist.org/packages/ebidtech/common-object) [![Dependency Status](https://www.versioneye.com/user/projects/52e3942cec1375b900000105/badge.png)](https://www.versioneye.com/user/projects/52e3942cec1375b900000105)
+[![Latest Stable Version](https://poser.pugx.org/ebidtech/common-object/v/stable.png)](https://packagist.org/packages/ebidtech/common-object) [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/ebidtech/common-object/badges/quality-score.png?s=d02365dc27dbeb4cc2618035ccfb996a669e8f14)](https://scrutinizer-ci.com/g/ebidtech/common-object/) [![Dependency Status](https://www.versioneye.com/user/projects/52e3942cec1375b900000105/badge.png)](https://www.versioneye.com/user/projects/52e3942cec1375b900000105)
 
 ## Requirements ##
 
