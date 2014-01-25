@@ -42,7 +42,7 @@ require 'vendor/autoload.php';
 
 ## Usage ##
 
-
+For now for usage example look on [tests code](tests/EBT/CommonObject/Tests)
 
 ## Contributing ##
 
