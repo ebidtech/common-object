@@ -81,4 +81,30 @@ class IdSetTest extends TestCase
             ++$idVal;
         }
     }
+
+    public function testToArray()
+    {
+        $ids = new TestIdSet(
+            array(
+                new TestId(10),
+                new TestId(50),
+                new TestId(80)
+            )
+        );
+
+        $this->assertEquals(array(10, 50, 80), $ids->toArray());
+    }
+
+    public function testToString()
+    {
+        $ids = new TestIdSet(
+            array(
+                new TestId(10),
+                new TestId(50),
+                new TestId(80)
+            )
+        );
+
+        $this->assertEquals('10,50,80', (string) $ids);
+    }
 }

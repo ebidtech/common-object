@@ -28,6 +28,8 @@ class IdSet implements CollectionInterface
     use GetCollectionTrait;
     use IterableTrait;
 
+    const DELIMITER = ',';
+
     /**
      * @var Id[]
      */
@@ -77,5 +79,35 @@ class IdSet implements CollectionInterface
         }
 
         $this->collection[] = $id;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $ids = array();
+
+        /** @var Id $id */
+        foreach ($this as $id) {
+            $ids[] = $id->get();
+        }
+
+        return $ids;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        $ids = array();
+
+        /** @var Id $id */
+        foreach ($this as $id) {
+            $ids[] = (string) $id;
+        }
+
+        return implode(static::DELIMITER, $ids);
     }
 }

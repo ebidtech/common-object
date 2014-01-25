@@ -19,8 +19,6 @@ use EBT\CommonObject\Exception\InvalidArgumentException;
  */
 abstract class IdSetFactory
 {
-    const DELIMITER = ',';
-
     /**
      * @param array $idsArr
      *
@@ -52,7 +50,7 @@ abstract class IdSetFactory
 
         $idsStr = preg_replace('/\s+/', '', $idsStr);
 
-        $idsArr = $idsStr == '' ? array() : explode(static::DELIMITER, $idsStr);
+        $idsArr = $idsStr == '' ? array() : explode(IdSet::DELIMITER, $idsStr);
 
         return static::fromArray($idsArr);
     }
