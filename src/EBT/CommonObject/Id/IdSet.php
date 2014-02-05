@@ -15,6 +15,7 @@ use EBT\Collection\CollectionInterface;
 use EBT\Collection\CountableTrait;
 use EBT\Collection\EmptyTrait;
 use EBT\Collection\IterableTrait;
+use EBT\Collection\GetItemsTrait;
 use EBT\CommonObject\Exception\InvalidArgumentException;
 
 /**
@@ -25,13 +26,14 @@ class IdSet implements CollectionInterface
     use CountableTrait;
     use EmptyTrait;
     use IterableTrait;
+    use GetItemsTrait;
 
     const DELIMITER = ',';
 
     /**
      * @var Id[]
      */
-    protected $ids = array();
+    protected $items = array();
 
     /**
      * @param Id[] $ids
@@ -41,14 +43,6 @@ class IdSet implements CollectionInterface
         foreach ($ids as $id) {
             method_exists($this, 'add') ? $this->add($id) : $this->addInternal($id);
         }
-    }
-
-    /**
-     * @return Id[]
-     */
-    protected function &getItems()
-    {
-        return $this->ids;
     }
 
     /**
@@ -84,7 +78,7 @@ class IdSet implements CollectionInterface
             throw InvalidArgumentException::alreadyExists('ids', $id);
         }
 
-        $this->ids[] = $id;
+        $this->items[] = $id;
     }
 
     /**
