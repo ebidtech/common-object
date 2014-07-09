@@ -18,7 +18,7 @@ abstract class ApprovalIdsExceptionsFactory
      */
     public static function createEmpty()
     {
-        return new ApprovalIdsExceptions(array(), array());
+        return static::create(array(), array());
     }
 
     /**
@@ -31,6 +31,17 @@ abstract class ApprovalIdsExceptionsFactory
         $approvedIds = $approvalsArr[ApprovalIdsExceptions::APPROVED];
         $rejectedIds = $approvalsArr[ApprovalIdsExceptions::REJECTED];
 
-        return new ApprovalIdsExceptions($approvedIds, $rejectedIds);
+        return static::create($approvedIds, $rejectedIds);
+    }
+
+    /**
+     * @param int[] $approved
+     * @param int[] $rejected
+     *
+     * @return ApprovalIdsExceptions
+     */
+    public static function create(array $approved, array $rejected)
+    {
+        return new ApprovalIdsExceptions($approved, $rejected);
     }
 }
