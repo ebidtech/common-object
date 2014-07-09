@@ -54,6 +54,40 @@ class InvalidArgumentException extends \InvalidArgumentException
     }
 
     /**
+     * @param string $property
+     * @param mixed  $value
+     *
+     * @return InvalidArgumentException
+     */
+    public static function notPositiveIntegerArray($property, $value)
+    {
+        return new static(
+            sprintf(
+                '"%s" expected array of positive integers got: "%s"',
+                $property,
+                static::getStringRepresentation($value)
+            )
+        );
+    }
+
+    /**
+     * @param array $approved
+     * @param array $rejected
+     *
+     * @return InvalidArgumentException
+     */
+    public static function approvedRejectedCommonElements(array $approved, array $rejected)
+    {
+        return new static(
+            sprintf(
+                '"%s" already exists on "%s"',
+                static::getStringRepresentation($approved),
+                static::getStringRepresentation($rejected)
+            )
+        );
+    }
+
+    /**
      * @param mixed $value
      *
      * @return string
