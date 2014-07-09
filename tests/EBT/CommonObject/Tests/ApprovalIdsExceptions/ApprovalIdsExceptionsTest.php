@@ -43,15 +43,9 @@ class ApprovalIdsExceptionsTest extends TestCase
     {
         $emptyApprovals = new ApprovalIdsExceptions(array(), array());
 
-        $this->assertEquals(
-            array(),
-            $emptyApprovals->getApproved()
-        );
+        $this->assertEquals(array(), $emptyApprovals->getApproved());
 
-        $this->assertEquals(
-            array(),
-            $emptyApprovals->getRejected()
-        );
+        $this->assertEquals(array(), $emptyApprovals->getRejected());
 
         $this->assertEquals(
             array(ApprovalIdsExceptions::APPROVED => array(), ApprovalIdsExceptions::REJECTED => array()),
@@ -66,15 +60,9 @@ class ApprovalIdsExceptionsTest extends TestCase
 
         $emptyApprovals = new ApprovalIdsExceptions($approved, $rejected);
 
-        $this->assertEquals(
-            $approved,
-            $emptyApprovals->getApproved()
-        );
+        $this->assertEquals($approved, $emptyApprovals->getApproved());
 
-        $this->assertEquals(
-            $rejected,
-            $emptyApprovals->getRejected()
-        );
+        $this->assertEquals($rejected, $emptyApprovals->getRejected());
 
         $this->assertEquals(
             array(ApprovalIdsExceptions::APPROVED => $approved, ApprovalIdsExceptions::REJECTED => $rejected),
