@@ -11,6 +11,9 @@
 
 namespace EBT\CommonObject\ApprovalIdsExceptions;
 
+use EBT\CommonObject\Id\IdSet;
+use EBT\CommonObject\Id\IdSetFactory;
+
 abstract class ApprovalIdsExceptionsFactory
 {
     /**
@@ -22,16 +25,14 @@ abstract class ApprovalIdsExceptionsFactory
     }
 
     /**
-     * @param array $approvalsArr
+     * @param IdSet $approvedIds
+     * @param IdSet $rejectedIds
      *
      * @return ApprovalIdsExceptions
      */
-    public static function fromArray($approvalsArr)
+    public static function fromIdSets(IdSet $approvedIds, IdSet $rejectedIds)
     {
-        $approvedIds = $approvalsArr[ApprovalIdsExceptions::APPROVED];
-        $rejectedIds = $approvalsArr[ApprovalIdsExceptions::REJECTED];
-
-        return static::create($approvedIds, $rejectedIds);
+        return new ApprovalIdsExceptions($approvedIds, $rejectedIds);
     }
 
     /**
@@ -42,6 +43,22 @@ abstract class ApprovalIdsExceptionsFactory
      */
     public static function create(array $approved, array $rejected)
     {
-        return new ApprovalIdsExceptions($approved, $rejected);
+        $approvedIds = IdSetFactory::fromArray($approved);
+        $rejectedIds = IdSetFactory::fromArray($rejected);
+
+        return static::fromIdSets($approvedIds, $rejectedIds);
+    }
+
+    /**
+     * @param array $approvalsArr
+     *
+     * @return ApprovalIdsExceptions
+     */
+    public static function fromArray($approvalsArr)
+    {
+        return static::create(
+            $approvalsArr[ApprovalIdsExceptions::APPROVED],
+            $approvalsArr[ApprovalIdsExceptions::REJECTED]
+        );
     }
 }

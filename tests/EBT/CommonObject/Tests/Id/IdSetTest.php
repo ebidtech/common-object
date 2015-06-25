@@ -107,4 +107,18 @@ class IdSetTest extends TestCase
 
         $this->assertEquals('10,50,80', (string) $ids);
     }
+
+    /**
+     * @covers EBT\CommonObject\Id\IdSet::intersects
+     */
+    public function testIntersects()
+    {
+        $idSet1 = new IdSet(array(new Id(2), new Id(4), new Id(5)));
+        $idSet2 = new IdSet(array(new Id(3), new Id(7)));
+        $idSet3 = new IdSet(array(new Id(2), new Id(8)));
+
+        $this->assertFalse($idSet1->intersects($idSet2));
+        $this->assertTrue($idSet1->intersects($idSet3));
+        $this->assertFalse($idSet2->intersects($idSet3));
+    }
 }

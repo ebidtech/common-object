@@ -52,16 +52,9 @@ class IdSet implements CollectionInterface
      *
      * @return bool
      */
-    final protected function existsInternal(Id $id)
+    final public function existsInternal(Id $id)
     {
-        /** @var Id $iId */
-        foreach ($this as $iId) {
-            if ($id->equals($iId)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_key_exists($id->get(), $this->items);
     }
 
     /**
@@ -78,7 +71,26 @@ class IdSet implements CollectionInterface
             throw InvalidArgumentException::alreadyExists('ids', $id);
         }
 
-        $this->items[] = $id;
+        $this->items[$id->get()] = $id;
+    }
+
+    /**
+     * Verify if another IdSet has common elements with this IdSet
+     *
+     * @param IdSet $other
+     *
+     * @return bool
+     */
+    public function intersects(IdSet $other)
+    {
+        /** @var Id $otherId */
+        foreach ($other as $otherId) {
+            if ($this->existsInternal($otherId)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

@@ -12,6 +12,8 @@
 namespace EBT\CommonObject\ApprovalIdsExceptions;
 
 use EBT\CommonObject\Exception\InvalidArgumentException;
+use EBT\CommonObject\Id\IdFactory;
+use EBT\CommonObject\Id\IdSet;
 
 class ApprovalIdsExceptions
 {
@@ -20,33 +22,25 @@ class ApprovalIdsExceptions
     const REJECTED = 'rejected';
 
     /**
-     * @var int[]
+     * @var IdSet
      */
     protected $approved;
 
     /**
-     * @var int[]
+     * @var IdSet
      */
     protected $rejected;
 
     /**
-     * @param int[] $approved
-     * @param int[] $rejected
+     * @param IdSet $approved
+     * @param IdSet $rejected
      *
      * @throws InvalidArgumentException
      */
-    public function __construct(array $approved, array $rejected)
+    public function __construct(IdSet $approved, IdSet $rejected)
     {
-        if (!$this->validateIntPositiveArray($approved)) {
-            throw InvalidArgumentException::notPositiveIntegerArray('ApprovalIdsExceptions.approved', $approved);
-        }
-
-        if (!$this->validateIntPositiveArray($rejected)) {
-            throw InvalidArgumentException::notPositiveIntegerArray('ApprovalIdsExceptions.rejected', $rejected);
-        }
-
-        if (count(array_intersect($approved, $rejected)) > 0) {
-            throw InvalidArgumentException::approvedRejectedCommonElements($approved, $rejected);
+        if ($approved->intersects($rejected)) {
+            throw InvalidArgumentException::approvedRejectedCommonElements($approved->toArray(), $rejected->toArray());
         }
 
         $this->approved = $approved;
@@ -54,7 +48,7 @@ class ApprovalIdsExceptions
     }
 
     /**
-     * @return int[]
+     * @return IdSet
      */
     public function getApproved()
     {
@@ -62,11 +56,31 @@ class ApprovalIdsExceptions
     }
 
     /**
-     * @return int[]
+     * @return IdSet
      */
     public function getRejected()
     {
         return $this->rejected;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return bool
+     */
+    public function isIdApproved($id)
+    {
+        return $this->approved->existsInternal(IdFactory::create($id));
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return bool
+     */
+    public function isIdRejected($id)
+    {
+        return $this->rejected->existsInternal(IdFactory::create($id));
     }
 
     /**
@@ -75,27 +89,8 @@ class ApprovalIdsExceptions
     public function toArray()
     {
         return array(
-            self::APPROVED => $this->approved,
-            self::REJECTED => $this->rejected,
+            self::APPROVED => $this->approved->toArray(),
+            self::REJECTED => $this->rejected->toArray(),
         );
-    }
-
-    /**
-     * Verify if an array has only positive integers
-     *
-     * @param array $array
-     *
-     * @return bool
-     */
-    protected function validateIntPositiveArray(array $array)
-    {
-        foreach ($array as $id) {
-
-            if (!is_int($id) || $id < 1) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }
