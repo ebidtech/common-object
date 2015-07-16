@@ -11,7 +11,7 @@
 
 namespace EBT\CommonObject\Id;
 
-use EBT\Validator\ValidatorBasicExtended;
+use EBT\Validator\Model\Validator\Validator;
 use EBT\CommonObject\Exception\InvalidArgumentException;
 
 /**
@@ -44,7 +44,7 @@ abstract class IdSetFactory
      */
     public static function fromString($idsStr)
     {
-        if (!ValidatorBasicExtended::isTypeString($idsStr)) {
+        if (!Validator::requiredString($idsStr)) {
             throw InvalidArgumentException::notString('ids', $idsStr);
         }
 

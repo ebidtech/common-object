@@ -14,8 +14,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.4",
-        "ebidtech/validator": "0.1.*",
-        "ebidtech/collection": "2.0.*"
+        "ebidtech/ebt-validator": "1.*"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*",

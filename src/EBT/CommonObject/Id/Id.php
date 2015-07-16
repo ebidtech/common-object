@@ -11,7 +11,7 @@
 
 namespace EBT\CommonObject\Id;
 
-use EBT\Validator\ValidatorExtended;
+use EBT\Validator\Model\Validator\Validator;
 use EBT\CommonObject\Exception\InvalidArgumentException;
 
 /**
@@ -43,7 +43,7 @@ class Id
      */
     protected function setId($id)
     {
-        if (!ValidatorExtended::isPositiveInteger($id)) {
+        if (!Validator::requiredPositiveInteger($id)) {
             throw InvalidArgumentException::notPositiveInteger('id', $id);
         }
 
