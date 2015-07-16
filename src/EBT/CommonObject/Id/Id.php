@@ -43,7 +43,7 @@ class Id
      */
     protected function setId($id)
     {
-        if (!Validator::requiredPositiveInteger($id)) {
+        if (!Validator::isRequiredPositiveInteger($id)) {
             throw InvalidArgumentException::notPositiveInteger('id', $id);
         }
 
