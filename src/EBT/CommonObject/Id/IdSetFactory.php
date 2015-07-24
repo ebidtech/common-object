@@ -44,7 +44,7 @@ abstract class IdSetFactory
      */
     public static function fromString($idsStr)
     {
-        if (!Validator::isRequiredString($idsStr)) {
+        if (!Validator::isOptionalString($idsStr)) {
             throw InvalidArgumentException::notString('ids', $idsStr);
         }
 
